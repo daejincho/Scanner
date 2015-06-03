@@ -1,7 +1,10 @@
 /*
-	Interpret jazyka IFJ2011
-	Autori:
+	Interpreter of imperative language LUA.
+	School project.
+	Lexical analyzer  
+	Author:
 		Tomas Valek (xvalek02)
+	Version: 1.6
 */
 
 #ifndef __SCANNER__H
@@ -9,47 +12,43 @@
 
 #include <stdio.h>
 
-/* Verze:	1.6*/
-
-//PROSIM NEPISTE KOMENTARE S DIAKRITIKOU !!!
-
-/* SEZNAM TOKENU */
+// LIST OF TOKENS
 enum {
-	/* 1-znakove */
-	T_OP_LBRACKET = 0, //	'('
-	T_OP_RBRACKET, //       ')'
-	T_OP_COMMA, //          ','
-	T_OP_SEMIC, //          ';'
-    
-    T_OP_FIRST, //zarazka zacatek bloku operatoru = 4
-	T_OP_ADD, // 		'+'
-	T_OP_SUB, // 		'-'
-	T_OP_DIV, // 		'/'
-	T_OP_MULT, // 		'*'
-	T_OP_POW, // 		'^'
-	T_OP_SM, // 		'<'
-	T_OP_BG, // 		'>'
-	T_OP_ASSIGN, // 	'='
-	T_OP_STRLEN , // 	'#'		13
-
-	/* 2-znakove */
-	T_OP_EQSM, // 		'<='
-	T_OP_EQBG, // 		'>='
-	T_OP_CAT, // 		'..'	konkatenace pouze pro string
-	T_OP_EQ, // 		'=='
-	T_OP_NOTEQ, // 		'~='
-	T_OP_LAST, // zarazka konec bloku operatoru
+	// 1-character
+	T_OP_LBRACKET = 0,	//	'('
+	T_OP_RBRACKET,		//	')'
+	T_OP_COMMA, 		//	','
+	T_OP_SEMIC, 		//	';'
 	
-	/* vice-znakove*/
-	T_ID, 			// identifikator 20
+	T_OP_FIRST, 		//stopper beginning of the block of operators = 4
+	T_OP_ADD, 			//	'+'
+	T_OP_SUB, 			// 	'-'
+	T_OP_DIV, 			// 	'/'
+	T_OP_MULT, 			// 	'*'
+	T_OP_POW, 			// 	'^'
+	T_OP_SM, 			// 	'<'
+	T_OP_BG, 			// 	'>'
+	T_OP_ASSIGN, 		// 	'='
+	T_OP_STRLEN , 		// 	'#'		13
 
-	/* datove typy */
+	// 2-characters
+	T_OP_EQSM, 			// 	'<='
+	T_OP_EQBG, 			// 	'>='
+	T_OP_CAT, 			// 	'..'	concate only for tring
+	T_OP_EQ, 			// 	'=='
+	T_OP_NOTEQ, 		//	'~='
+	T_OP_LAST, 			//stopper ending of the block of operators
+	
+	// multi-characters
+	T_ID, 				// identifier 20
+
+	//data types
 	T_VAL_INT,
 	T_VAL_DOUBLE,
-	T_VAL_STRING,	//23
+	T_VAL_STRING,		//23
 
-	/* klicove slova */
-	T_K_DO = 128,	//od 128, kvuli rychlejsimu bitovemu soucinu
+	//keywords
+	T_K_DO = 128,		//from 128, because 128 is faster for bit multiplication
 	T_K_ELSE,
 	T_K_END,
 	T_K_FALSE,
@@ -63,7 +62,7 @@ enum {
 	T_K_TRUE,
 	T_K_WHILE,
 	T_K_WRITE,
-//	T_K_AND,		logicke operatory jsou docasne vypnuty
+//	T_K_AND,		logical operator are disabled
 	T_K_BREAK,
 	T_K_ELSEIF,
 	T_K_FOR,
@@ -72,26 +71,27 @@ enum {
 //	T_K_OR,
 	T_K_REPEAT,
 	T_K_UNTIL,
-	/* funkce*/
-	T_BF_TYPE,//151, 148 pokud jsou log. op. vypnuty
+	//functions
+	T_BF_TYPE,		//151, 148 if logical operator are disabled
 	T_BF_SUBSTR,
 	T_BF_FIND,
 	T_BF_SORT,
 
-	/* chyby */
-	T_EOF = EOF, // konec souboru
-	T_ERROR = -2, // systemova chyba - out of memory, ...
-	T_INVALID = -3,	// chyba lex. analyzatoru, spatny vstup
+	//errors
+	T_EOF = EOF, 	//end of file
+	T_ERROR = -2, 	//system error -- out of memory, ...
+	T_INVALID = -3,	//error of lex. analyzer, bad input
 	T_START = -4
 };
 
+//Struct of token
 struct token_t {
 	int type;
 	union {
-		void *p;
-		int i;
-		double d;
-	}val;
+		void *p;	//for string
+		int i;		//for int
+		double d;	//for double
+	} val;
 };
 
 struct token_t get_token(void);
