@@ -1,7 +1,7 @@
 Lexical analyser (scanner)
 =======
 
-Lexical analyser of interpreter of imperative language LUA.
+Lexical analyser of interpreter of imperative language LUA.     
 http://en.wikipedia.org/wiki/Lexical_analysis
 
 input: source code
