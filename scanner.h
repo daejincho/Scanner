@@ -1,7 +1,7 @@
 /*
 	Interpreter of imperative language LUA.
 	School project.
-	Lexical analyzer  
+	Lexical analyser  
 	Author:
 		Tomas Valek (xvalek02)
 	Version: 1.6
@@ -80,7 +80,7 @@ enum {
 	//errors
 	T_EOF = EOF, 	//end of file
 	T_ERROR = -2, 	//system error -- out of memory, ...
-	T_INVALID = -3,	//error of lex. analyzer, bad input
+	T_INVALID = -3,	//error of lex. analyser, bad input
 	T_START = -4
 };
 

@@ -1,7 +1,7 @@
 /*
 	Interpreter of imperative language LUA.
 	School project.
-	Lexical analyzer
+	Lexical analyser
 	Author:
 		Tomas Valek (xvalek02)
 */
@@ -130,7 +130,7 @@ int add_char( char character, T_STRING* s ) {
 *********************************FUNCTIONS**************************************
 *******************************************************************************/
 
-/* The main function in lexical analyzer. Function transitions between states.
+/* The main function in lexical analyser. Function transitions between states.
 If it does not to finite state, it is an error. After show error -> free memory
 -> return token with error. If it does to finite state, return token with:
 * type - type of token
