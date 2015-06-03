@@ -1,7 +1,7 @@
 /*
 	Interpreter of imperative language LUA.
 	School project.
-	Lexical analyzer  
+	Lexical analyzer
 	Author:
 		Tomas Valek (xvalek02)
 */
